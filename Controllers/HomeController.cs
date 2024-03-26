@@ -37,10 +37,17 @@ namespace Portal.Controllers
                 PageTitle = "Ðåºñòðàö³ÿ",
                 FormModel = formModel
             };
-    
             return View(model);
         }
 
+        public IActionResult SignIn()
+        {
+            HomeModelsPageModel model = new()
+            {
+                PageTitle = "Âõ³ä",   
+            };
+            return View(model);
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

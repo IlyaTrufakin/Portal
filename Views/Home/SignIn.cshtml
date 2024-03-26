@@ -1,0 +1,34 @@
+﻿@model Portal.Models.Home.HomeModelsPageModel
+
+@{
+    ViewData["Title"] = "SignIn";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.PageTitle</h1>
+
+</div>
+<br />
+
+<p class="text-center lead">Будь ласка, для входу в портал введіть електронну адресу и пароль:</p>
+
+
+<form asp-action="SignIn" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="userEmail-addon"><i class="bi bi-envelope-at"></i></span>
+                    <input type="tel" class="form-control" placeholder="Введіть Email:" aria-label="UserEmail" aria-describedby="userEmail-addon" name="signup-userEmail">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="userPassword-addon"><i class="bi bi-person-fill-add"></i></span>
+                    <input type="password" class="form-control" placeholder="Введіть пароль:" aria-label="UserPassword" aria-describedby="userPassword-addon" name="signup-userPassword">
+                </div>
+                <button type="submit" class="btn btn-outline-primary gap-2 col-3 mx-auto">Увійти</button>
+            </div>
+        </div>
+    </div>
+</form>
+
