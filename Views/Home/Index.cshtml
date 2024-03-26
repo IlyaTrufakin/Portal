@@ -1,0 +1,38 @@
+﻿@model Portal.Models.Home.HomeModelsPageModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4 lead">Вітаємо на Виробничому порталі!</h1>
+    <hr />
+    <br />
+    <p class="lead"><strong>Цей портал створений, щоб допомогти виробникам та замовникам знайти один одного.</strong></p>
+    <p class="lead"><strong>Це місце зустрічі попиту та пропозиції у сфері контрактного виробництва, промислової кооперації та переробки сировини.</strong></p>
+    <br />
+    <p class="lead">Для доступу до порталу, необхідно Зареєструватися/Увійти.</p>
+    <br />
+    <div class="d-grid gap-2 col-3 mx-auto">
+        <a asp-controller="Home" asp-action="Models" class="btn btn-outline-secondary">Реєстрація</a>
+        <a asp-controller="Home" asp-action="Models" class="btn btn-outline-secondary">Увійти</a>
+    </div>
+    <p>
+        <br />  
+        <br />
+        Після завершення реєстрації ви зможите:
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Як виробники</strong>, розмістити інформацію про свої виробничі потужності та послуги, приймати замовлення від клієнтів.</li>
+            <li class="list-group-item"><strong>Як замовники</strong>, опублікувати запит на виготовлення продукції та знайти найкращих виконавців.</li>
+            <li class="list-group-item"></li>
+
+        </ul>
+    </p>
+</div>
+
+
+
+
+
+
+

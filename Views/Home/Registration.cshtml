@@ -1,0 +1,92 @@
+﻿@model Portal.Models.Home.HomeModelsPageModel
+
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.PageTitle</h1>
+
+</div>
+
+
+
+
+
+
+
+<p>Будь ласка, заповніть реєстраційну форму.</p>
+<p>
+    З точки зору MVC, як патерна проектування, Модель – це архітектурна частина проекту, яка відповідає за "постачання" даних.
+</p>
+<p>
+
+    В ASP дещо відмінне розуміння моделей – задачі постачання даних делегуються "контексту" даних (DataContext),
+    тоді як самі моделі – це класи (типи даних) за допомогою яких дані передаються між різними частинами системи.
+</p>
+<p>
+    У відповідності до тих частин системи, між якими передаються дані, моделі умовно розрізняють як:
+    <ul>
+        <li>Моделі представлень (View Models / Page Models) - набір даних, який потрібен для заповнення сторінки та її відображення (дані про користувача, вибрані товари, акційні пропозиції - усе разом)</li>
+        <li>Моделі форм (Form Models) - сукупність даних, що їх передає HTML форма і обробляється контролером.</li>
+        <li>Моделі даних (Entities) - класи для відображення (ORM) вихідних даних (від БД чи JSON API тощо)</li>
+    </ul>
+</p>
+
+<p>
+    <strong>Моделі представлень.</strong> Оголошуемо класи у розділі "Models".
+    У контролері у відповідному методі створюемо і заповнюемо об'ект належного класу (model) та передаемо його в інструкції
+    <code>return View(model)</code>
+    <br />
+    У представленні на початку документу зазначаемо тип моделі:
+    <br />
+    <code>&commat; model ASP_SPU221.Models.Home.HomeModelsPageModel </code>
+    <br />
+    і в подальшому коді переданий об'ект (model) доступний через ключове слово <code>Model</code>
+</p>
+
+<p>
+    <strong>Моделі форм</strong> слугують для прийняття даних від HTML форм, узгодження типів даних (в HTML всі дані текстові, у С# - ні),
+    а також імен полів (HTML дозволяе імена на кшталт "field-name", які у С# не е прийнятними)
+</p>
+
+<form asp-action="Models" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="username-addon"><i class="bi bi-person-fill-add"></i></span>
+                <input type="text" class="form-control" placeholder="Введіть Ім`я:" aria-label="Username" aria-describedby="username-addon" name="signup-username">
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="userEmail-addon"><i class="bi bi-envelope-open"></i></span>
+                <input type="email" class="form-control" placeholder="Введіть Email:" aria-label="UserEmail" aria-describedby="userEmail-addon" name="signup-email">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="signup-avatar"><i class="bi bi-person"></i></label>
+                <input type="file" class="form-control" id="signup-avatar" name="signup-avatar">
+            </div>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-outline-primary">Реєстрація</button>
+        </div>
+
+
+        </button>
+    </div>
+</form>
+
+@if (Model.FormModel.UserName != null)
+{
+    <p>
+        Ви ввели: Ім`я: @(Model.FormModel.UserName)
+        <br />
+        Пошта:@(Model.FormModel.UserEmail)
+    </p>
+}
