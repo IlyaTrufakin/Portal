@@ -3,12 +3,18 @@ using Portal.Models;
 using Portal.Models.Home;
 using Portal.Models.Home.SignUp;
 using System.Diagnostics;
+using Portal.Data.Dal;
+using Portal.Services.Hash;
+using Portal.Services.Kdf;
 
 namespace Portal.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHashService _hashService;
+        private readonly IKdfService _kdfService;
+        private readonly DataAccessor _dataAccessor;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -30,6 +36,18 @@ namespace Portal.Controllers
             return View();
         }
 
+
+        public IActionResult SignIn()
+        {
+            HomeModelsPageModel model = new()
+            {
+                PageTitle = "¬х≥д",   
+            };
+            return View(model);
+        }
+
+
+
         public IActionResult SignUp(SignUpFormModel? formModel)
         {
             SignUpPageModel pageModel = new()
@@ -40,13 +58,25 @@ namespace Portal.Controllers
             return View(pageModel);
         }
 
-        public IActionResult SignIn()
+        private Dictionary<String, String> _ValidateSignUpModel(SignUpFormModel? formModel)
         {
-            HomeModelsPageModel model = new()
+            Dictionary<String, String> res = new(); // перел≥к помилок по форм≥
+            if (formModel == null)
             {
-                PageTitle = "¬х≥д",   
-            };
-            return View(model);
+                res[nameof(formModel)] = "Model is null";
+            }
+            else
+            {
+                if (String.IsNullOrEmpty(formModel.UserFirstName))
+                {
+                    res[nameof(formModel.UserFirstName)] = "Name is empty";
+                }
+                if (String.IsNullOrEmpty(formModel.UserEmail))
+                {
+                    res[nameof(formModel.UserEmail)] = "≈лектронна адреса не задана";
+                }
+            }
+            return res;
         }
 
 

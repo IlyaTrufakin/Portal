@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Portal.Data.Context;
+using Portal.Data.Dal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,9 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
-    builder.Configuration.GetConnectionString("MsSql"))
-);
-
+builder.Configuration.GetConnectionString("MsSql")), ServiceLifetime.Singleton);
+builder.Services.AddSingleton<DataAccessor>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

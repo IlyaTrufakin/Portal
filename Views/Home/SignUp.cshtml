@@ -6,13 +6,20 @@
 
 <div class="text-center">
     <h1 class="display-4">@Model.PageTitle</h1>
-
 </div>
 <br />
 
+@if (Model.IsSuccess !=null)
+{
+    <div class="@(Model.IsSuccess ?? false ? "alert alert-Success" : "alert alert-dangerous") ">
+        Model.Message
+    </div>
+
+}
+
+
+
 <p class="lead">Будь ласка, заповніть реєстраційну форму.</p>
-
-
 <form asp-action="SignUp" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col">
