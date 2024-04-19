@@ -53,10 +53,46 @@ namespace Portal.Controllers
             SignUpPageModel pageModel = new()
             {
                 PageTitle = "Реєстрація",
-                SignUpFormModel = formModel
+                SignUpFormModel = formModel, 
+                ValidationErrors = _ValidateSignUpModel(formModel)
             };
+
+            if (formModel?.UserEmail != null) 
+            { 
+                if (pageModel.ValidationErrors.Any())
+                {
+                    pageModel.Message = "Реєстрація відхилена";
+                    pageModel.IsSuccess = false;                        
+                }
+                else
+                {
+                    _dataAccessor.UserDao.SignUpUser(mapUser(formModel));
+                    pageModel.Message = "Реєстрація успішна";
+                    pageModel.IsSuccess = true;
+                }
+
+
+
+
+            }
+
             return View(pageModel);
         }
+
+
+private Data.Entities.User mapUser(SignUpFormModel formModel)
+        {
+            string salt = Guid.NewGuid().ToString();
+            return new()
+            {
+                Id = new Guid(),
+                Name = formModel.UserFirstName,
+                SurName = formModel.UserSurName,
+                PhoneNumber = formModel.UserPhoneNumber,
+                Email = formModel.UserEmail
+            };
+        }
+
 
         private Dictionary<String, String> _ValidateSignUpModel(SignUpFormModel? formModel)
         {

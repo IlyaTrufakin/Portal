@@ -12,7 +12,7 @@ namespace Portal.Models.Home.SignUp
 
         [Required]
         [FromForm(Name = "signup-userSurname")]
-        public string UserLastName { get; set; }
+        public string UserSurName { get; set; }
 
         [Required]
         [MaxLength(20, ErrorMessage = "The field {0} only can contain {1} characters length.")]

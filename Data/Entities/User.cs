@@ -7,10 +7,12 @@
         public String SurName { get; set; } = null!;
         public String PhoneNumber { get; set; } = null!;
         public String Email { get; set; } = null!;
-        public int CountryId { get; set; }
-        public UserCountry Country { get; set; } = null!;
-        public int RegionId { get; set; }
-        public UserRegion Region { get; set; } = null!;
+ /*       public int CountryId { get; set; }
+        public UserCountry Country { get; set; } = null!;*/
+        public String Country { get; set; } = null!;
+  /*      public int RegionId { get; set; }
+        public UserRegion Region { get; set; } = null!;*/
+        public String Region { get; set; } = null!;
         public String UserLocality { get; set; } = null!;
         public String UserAddress1 { get; set; } = null!;
         public String UserAddress2 { get; set; } = null!;

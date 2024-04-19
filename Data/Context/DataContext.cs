@@ -6,8 +6,8 @@ namespace Portal.Data.Context
     public class DataContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<UserCountry> Countries { get; set; }
-        public DbSet<UserRegion> Regions { get; set; }  
+       // public DbSet<UserCountry> Countries { get; set; }
+        //public DbSet<UserRegion> Regions { get; set; }  
 
         public DataContext(DbContextOptions options) : base(options) { }
 
@@ -17,7 +17,7 @@ namespace Portal.Data.Context
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
-            modelBuilder.Entity<User>()
+  /*          modelBuilder.Entity<User>()
                 .HasOne(u => u.Country)
                 .WithMany(c => c.Users)
                 .HasForeignKey(u => u.CountryId);
@@ -31,7 +31,7 @@ namespace Portal.Data.Context
                 .HasKey(u => u.CountryId);
 
             modelBuilder.Entity<UserRegion>()
-                .HasKey(u => u.UserRegionId);
+                .HasKey(u => u.UserRegionId);*/
 
         }
     }
