@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace Portal.Models.Registration
+namespace Portal.Models.Home.SignUp
 {
-    public class RegistrationModelsViewModel
+    public class SignUpFormModel
     {
 
         [Required]
@@ -65,4 +65,3 @@ namespace Portal.Models.Registration
         public string UserPasswordConfirm { get; set; }
     }
 }
-

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Portal.Models;
 using Portal.Models.Account;
-using Portal.Models.Registration;
 using System.Diagnostics;
 
 namespace Portal.Controllers

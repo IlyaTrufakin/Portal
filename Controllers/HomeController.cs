@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Portal.Models;
 using Portal.Models.Home;
-using Portal.Models.Registration;
+using Portal.Models.Home.SignUp;
 using System.Diagnostics;
 
 namespace Portal.Controllers
@@ -30,14 +30,14 @@ namespace Portal.Controllers
             return View();
         }
 
-        public IActionResult Registration(RegistrationModelsViewModel? formModel)
+        public IActionResult SignUp(SignUpFormModel? formModel)
         {
-            HomeModelsPageModel model = new()
+            SignUpPageModel pageModel = new()
             {
                 PageTitle = "Ðåºñòðàö³ÿ",
-                FormModel = formModel
+                SignUpFormModel = formModel
             };
-            return View(model);
+            return View(pageModel);
         }
 
         public IActionResult SignIn()

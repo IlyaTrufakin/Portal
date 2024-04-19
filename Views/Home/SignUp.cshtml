@@ -1,4 +1,4 @@
-﻿@model Portal.Models.Home.HomeModelsPageModel
+﻿@model Portal.Models.Home.SignUp.SignUpPageModel
 
 @{
     ViewData["Title"] = "SignUp";
@@ -13,7 +13,7 @@
 <p class="lead">Будь ласка, заповніть реєстраційну форму.</p>
 
 
-<form asp-action="Registration" method="post" enctype="multipart/form-data">
+<form asp-action="SignUp" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col">
             <div class="row">
@@ -86,24 +86,24 @@
 
             <div class="row">
                 <p>Ви ввели:</p>
-                @if (Model.FormModel.UserFirstName != null)
+                @if (Model.SignUpFormModel.UserFirstName != null)
                 {
-                    <ul>
-                        <li>Ім`я: @(Model.FormModel.UserFirstName)</li>
-                        <li>Прізвище: @(Model.FormModel.UserLastName)</li>
-                        <li>Телефон: @(Model.FormModel.UserPhoneNumber)</li>
-                        <li>Пошта:@(Model.FormModel.UserEmail)</li>
-                        <li>Страна: @(Model.FormModel.UserCountry)</li>
-                        <li>Область: @(Model.FormModel.UserRegion)</li>
-                        <li>Населений пункт: @(Model.FormModel.UserLocality)</li>
-                        <li>Адреса: @(Model.FormModel.UserAddress1)</li>
-                        <li>Будова/дім/кв.: @(Model.FormModel.UserAddress2)</li>
-                        <li>Форма взаємодії : @(Model.FormModel.UserInteractionForm)</li>
-                        <li>Назва организації: @(Model.FormModel.UserCompanyName)</li>
-                        <li>Пароль: @(Model.FormModel.UserPassword)</li>
-                        <li>підтвердження паролю: @(Model.FormModel.UserPasswordConfirm)</li>
+                  @*   <ul>
+                        <li>Ім`я: @(Model.SignUpFormModel.UserFirstName)</li>
+                        <li>Прізвище: @(Model.SignUpFormModel.UserLastName)</li>
+                        <li>Телефон: @(Model.SignUpFormModel.UserPhoneNumber)</li>
+                        <li>Пошта:@(Model.SignUpFormModel.UserEmail)</li>
+                        <li>Страна: @(Model.SignUpFormModel.UserCountry)</li>
+                        <li>Область: @(Model.SignUpFormModel.UserRegion)</li>
+                        <li>Населений пункт: @(Model.SignUpFormModel.UserLocality)</li>
+                        <li>Адреса: @(Model.SignUpFormModel.UserAddress1)</li>
+                        <li>Будова/дім/кв.: @(Model.SignUpFormModel.UserAddress2)</li>
+                        <li>Форма взаємодії : @(Model.SignUpFormModel.UserInteractionForm)</li>
+                        <li>Назва организації: @(Model.SignUpFormModel.UserCompanyName)</li>
+                        <li>Пароль: @(Model.SignUpFormModel.UserPassword)</li>
+                        <li>підтвердження паролю: @(Model.SignUpFormModel.UserPasswordConfirm)</li>
 
-                    </ul>
+                    </ul> *@
             
                 }
             </div>
