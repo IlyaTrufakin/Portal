@@ -9,15 +9,6 @@
 </div>
 <br />
 
-@if (Model.IsSuccess !=null)
-{
-    <div class="@(Model.IsSuccess ?? false ? "alert alert-Success" : "alert alert-dangerous") ">
-        @Model.Message
-    </div>
-
-}
-
-
 
 <p class="lead">Будь ласка, заповніть реєстраційну форму.</p>
 <form asp-action="SignUp" method="post" enctype="multipart/form-data">
@@ -28,6 +19,10 @@
                     <span class="input-group-text" id="userName-addon"><i class="bi bi-person-fill-add"></i></span>
                     <input type="text" class="form-control" placeholder="Введіть Ім`я:" aria-label="UserName" aria-describedby="userName-addon" name="signup-userName">
                 </div>
+                @if (Model.ValidationErrors.ContainsKey("UserName"))
+                {
+                    <div class="alert alert-danger">@Model.ValidationErrors["UserName"]</div>
+                }
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="userSurname-addon"><i class="bi bi-person-fill-add"></i></span>
                     <input type="text" class="form-control" placeholder="Введіть Прізвище:" aria-label="UserSurname" aria-describedby="userSurname-addon" name="signup-userSurname">
@@ -89,30 +84,21 @@
                 <div class="input-group mb-3">
                     <button type="submit" class="btn btn-outline-primary">Реєстрація</button>
                 </div>
+                <div class=" mb-3">
+                    @if (Model.IsSuccess != null)
+                    {
+                        <div class="d-flex p-2 bd-highlight alert  @(Model.IsSuccess ?? false ? "alert-success" : "alert-danger")" role="alert">
+                            @Model.Message
+                          
+                        </div>
+                    }
+                </div>
             </div>
 
             <div class="row">
-                <p>Ви ввели:</p>
-                @if (Model.SignUpFormModel.UserName != null)
-                {
-                  @*   <ul>
-                        <li>Ім`я: @(Model.SignUpFormModel.UserFirstName)</li>
-                        <li>Прізвище: @(Model.SignUpFormModel.UserLastName)</li>
-                        <li>Телефон: @(Model.SignUpFormModel.UserPhoneNumber)</li>
-                        <li>Пошта:@(Model.SignUpFormModel.UserEmail)</li>
-                        <li>Страна: @(Model.SignUpFormModel.UserCountry)</li>
-                        <li>Область: @(Model.SignUpFormModel.UserRegion)</li>
-                        <li>Населений пункт: @(Model.SignUpFormModel.UserLocality)</li>
-                        <li>Адреса: @(Model.SignUpFormModel.UserAddress1)</li>
-                        <li>Будова/дім/кв.: @(Model.SignUpFormModel.UserAddress2)</li>
-                        <li>Форма взаємодії : @(Model.SignUpFormModel.UserInteractionForm)</li>
-                        <li>Назва организації: @(Model.SignUpFormModel.UserCompanyName)</li>
-                        <li>Пароль: @(Model.SignUpFormModel.UserPassword)</li>
-                        <li>підтвердження паролю: @(Model.SignUpFormModel.UserPasswordConfirm)</li>
 
-                    </ul> *@
-            
-                }
+
+           
             </div>
         </div>
 
