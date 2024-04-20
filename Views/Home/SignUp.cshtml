@@ -114,17 +114,43 @@
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="userInteractionForm-addon"><i class="bi bi-person-workspace"></i></span>
-                    <select class="form-select" aria-label="UserInteractionForm" aria-describedby="userInteractionForm-addon
-                            name="signup-userInteractionForm" value="@Model.SignUpFormModel?.UserInteractionForm">
-                        <option selected>Оберить форму взаємодії (фізична/юридична особа)</option>
+                    <select class="form-select" aria-label="UserInteractionForm" aria-describedby="userInteractionForm-addon"
+                            name="signup-userInteractionForm">
+                        @*                       <option selected>Оберить форму взаємодії (фізична/юридична особа)</option>
                         <option value="Фізична-особа">Фізична особа</option>
-                        <option value="Юрідична-особа">Юрідична особа</option>
+                        <option value="Юрідична-особа">Юрідична особа</option> *@
+
+
+
+                        @if (Model.SignUpFormModel?.UserInteractionForm == "Фізична-особа")
+                        {
+                            <option selected>Фізична особа</option>
+                            <option value="Юрідична-особа">Юрідична особа</option>
+                        }
+                        else if (Model.SignUpFormModel?.UserInteractionForm == "Юрідична-особа")
+                        {
+                            <option selected>Юрідична особа</option>
+                            <option value="Фізична-особа">Фізична особа</option>
+                        }
+                        else
+                        {
+                            <option selected>Оберить форму взаємодії (фізична/юридична особа)</option>
+                            <option value="Фізична-особа">Фізична особа</option>
+                            <option value="Юрідична-особа">Юрідична особа</option>
+                        }
                     </select>
                 </div>
                 @if (Model.ValidationErrors.ContainsKey("UserInteractionForm"))
                 {
                     <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserInteractionForm"]</div>
                 }
+
+
+                @* <option value="Фізична-особа">Фізична особа</option>
+                value="@Model.SignUpFormModel?.UserInteractionForm"
+                <option value="Юрідична-особа">Юрідична особа</option> *@
+
+
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="userCompanyName-addon"><i class="bi bi-building"></i></span>

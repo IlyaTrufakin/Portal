@@ -75,10 +75,10 @@ namespace Portal.Controllers
                     _dataAccessor.UserDao.SignUpUser(mapUser(formModel));
                     pageModel.Message = "Реєстрація успішна";
                     pageModel.IsSuccess = true;
-                    //formModel = null;
+            
                 }
 
-
+                formModel = null;
             }
 
             return View(pageModel);
