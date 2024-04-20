@@ -2,13 +2,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Portal.Data.Context;
 using Portal.Data.Dal;
+using Portal.Services.Hash;
 using Portal.Services.Kdf;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSingleton<IHashService , Md5HashService>();
 builder.Services.AddSingleton<IKdfService, PbKdf1Service>();
 
 builder.Services.AddDbContext<DataContext>(options => 

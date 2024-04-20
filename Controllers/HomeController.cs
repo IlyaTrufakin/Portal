@@ -17,12 +17,12 @@ namespace Portal.Controllers
         private readonly DataAccessor _dataAccessor;
 
         public HomeController(ILogger<HomeController> logger, 
-                                //IHashService hashService, 
+                                IHashService hashService, 
                                 IKdfService kdfService, 
                                 DataAccessor dataAccessor)
         {
             _logger = logger;
-           // _hashService = hashService;
+            _hashService = hashService;
             _kdfService = kdfService;
             _dataAccessor = dataAccessor;
         }
