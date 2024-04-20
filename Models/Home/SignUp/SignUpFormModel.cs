@@ -8,7 +8,7 @@ namespace Portal.Models.Home.SignUp
 
         [Required]
         [FromForm(Name = "signup-userName")]
-        public string UserFirstName { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [FromForm(Name = "signup-userSurname")]

@@ -16,14 +16,20 @@ namespace Portal.Controllers
         private readonly IKdfService _kdfService;
         private readonly DataAccessor _dataAccessor;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, 
+                                //IHashService hashService, 
+                                IKdfService kdfService, 
+                                DataAccessor dataAccessor)
         {
             _logger = logger;
+           // _hashService = hashService;
+            _kdfService = kdfService;
+            _dataAccessor = dataAccessor;
         }
 
-         public IActionResult Index()
+        public IActionResult Index()
         {
-               return View();
+            return View();
         }
 
         public IActionResult Privacy()
@@ -37,32 +43,32 @@ namespace Portal.Controllers
         }
 
 
-        public IActionResult SignIn()
+        public ViewResult SignIn()
         {
             HomeModelsPageModel model = new()
             {
-                PageTitle = "¬х≥д",   
+                PageTitle = "¬х≥д",
             };
             return View(model);
         }
 
 
 
-        public IActionResult SignUp(SignUpFormModel? formModel)
+        public ViewResult SignUp(SignUpFormModel? formModel)
         {
             SignUpPageModel pageModel = new()
             {
                 PageTitle = "–еЇстрац≥€",
-                SignUpFormModel = formModel, 
+                SignUpFormModel = formModel,
                 ValidationErrors = _ValidateSignUpModel(formModel)
             };
 
-            if (formModel?.UserEmail != null) 
-            { 
+            if (formModel?.UserEmail != null)
+            {
                 if (pageModel.ValidationErrors.Any())
                 {
                     pageModel.Message = "–еЇстрац≥€ в≥дхилена";
-                    pageModel.IsSuccess = false;                        
+                    pageModel.IsSuccess = false;
                 }
                 else
                 {
@@ -72,24 +78,32 @@ namespace Portal.Controllers
                 }
 
 
-
-
             }
 
             return View(pageModel);
         }
 
 
-private Data.Entities.User mapUser(SignUpFormModel formModel)
+        private Data.Entities.User mapUser(SignUpFormModel formModel)
         {
             string salt = Guid.NewGuid().ToString();
             return new()
             {
-                Id = new Guid(),
-                Name = formModel.UserFirstName,
-                SurName = formModel.UserSurName,
-                PhoneNumber = formModel.UserPhoneNumber,
-                Email = formModel.UserEmail
+                Id = Guid.NewGuid(),
+                UserName = formModel.UserName,
+                UserSurName = formModel.UserSurName,
+                UserPhoneNumber = formModel.UserPhoneNumber,
+                UserEmail = formModel.UserEmail,
+                UserCountry = formModel.UserCountry,
+                UserRegion = formModel.UserRegion,
+                UserLocality = formModel.UserLocality,
+                UserAddress1 = formModel.UserAddress1,
+                UserAddress2 = formModel.UserAddress2,
+                UserInteractionForm = formModel.UserInteractionForm,
+                UserCompanyName = formModel.UserCompanyName,
+                UserRegistered = DateTime.Now,
+                Salt = salt,
+                DerivedKey = _kdfService.GetDerivedKey(formModel.UserPassword, salt)
             };
         }
 
@@ -103,13 +117,17 @@ private Data.Entities.User mapUser(SignUpFormModel formModel)
             }
             else
             {
-                if (String.IsNullOrEmpty(formModel.UserFirstName))
+                if (String.IsNullOrEmpty(formModel.UserName))
                 {
-                    res[nameof(formModel.UserFirstName)] = "Name is empty";
+                    res[nameof(formModel.UserName)] = "≤м'€ користувача не вказано!";
                 }
                 if (String.IsNullOrEmpty(formModel.UserEmail))
                 {
-                    res[nameof(formModel.UserEmail)] = "≈лектронна адреса не задана";
+                    res[nameof(formModel.UserEmail)] = "≈лектронна адреса не задана!";
+                }
+                if (! _dataAccessor.UserDao.IsEmailFree(formModel.UserEmail))
+                {
+                    res[nameof(formModel.UserEmail)] = "¬казана електронна адреса вже зареЇстрована!";
                 }
             }
             return res;

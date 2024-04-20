@@ -12,7 +12,7 @@
 @if (Model.IsSuccess !=null)
 {
     <div class="@(Model.IsSuccess ?? false ? "alert alert-Success" : "alert alert-dangerous") ">
-        Model.Message
+        @Model.Message
     </div>
 
 }
@@ -93,7 +93,7 @@
 
             <div class="row">
                 <p>Ви ввели:</p>
-                @if (Model.SignUpFormModel.UserFirstName != null)
+                @if (Model.SignUpFormModel.UserName != null)
                 {
                   @*   <ul>
                         <li>Ім`я: @(Model.SignUpFormModel.UserFirstName)</li>

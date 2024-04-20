@@ -14,7 +14,7 @@ namespace Portal.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                .HasIndex(u => u.Email)
+                .HasIndex(u => u.UserEmail)
                 .IsUnique();
 
   /*          modelBuilder.Entity<User>()

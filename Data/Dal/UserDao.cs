@@ -12,7 +12,7 @@ namespace Portal.Data.Dal
         }
         public bool IsEmailFree(String email)
         {
-            return _context.Users.Where(u => u.Email == email).Any();
+            return ! _context.Users.Where(u => u.UserEmail == email).Any();
         }
 
         public void SignUpUser(User user)
