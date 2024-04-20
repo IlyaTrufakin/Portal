@@ -138,6 +138,14 @@ namespace Portal.Controllers
                 {
                     res[nameof(formModel.UserEmail)] = "Вказана електронна адреса вже зареєстрована!";
                 }
+                if (String.IsNullOrEmpty(formModel.UserPassword))
+                {
+                    res[nameof(formModel.UserPassword)] = "Пароль не вказано!";
+                }
+                if (formModel.UserPassword != formModel.UserPasswordConfirm)
+                {
+                    res[nameof(formModel.UserPasswordConfirm)] = "Підтвердження паролю невірне!";
+                }
             }
             return res;
         }
