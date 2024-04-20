@@ -75,6 +75,7 @@ namespace Portal.Controllers
                     _dataAccessor.UserDao.SignUpUser(mapUser(formModel));
                     pageModel.Message = "Реєстрація успішна";
                     pageModel.IsSuccess = true;
+                    formModel = null;
                 }
 
 
@@ -120,6 +121,14 @@ namespace Portal.Controllers
                 if (String.IsNullOrEmpty(formModel.UserName))
                 {
                     res[nameof(formModel.UserName)] = "Ім'я користувача не вказано!";
+                }
+                if (String.IsNullOrEmpty(formModel.UserSurName))
+                {
+                    res[nameof(formModel.UserSurName)] = "Призвіще користувача не вказано!";
+                }
+                if (String.IsNullOrEmpty(formModel.UserPhoneNumber))
+                {
+                    res[nameof(formModel.UserPhoneNumber)] = "Номер телефону користувача не вказано!";
                 }
                 if (String.IsNullOrEmpty(formModel.UserEmail))
                 {
