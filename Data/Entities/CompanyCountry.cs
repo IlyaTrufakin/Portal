@@ -1,10 +1,10 @@
 ﻿namespace Portal.Data.Entities
 {
-    public class UserCountry
+    public class CompanyCountry
     {
-        public int CountryId { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; } = null!;
         public string PhoneCode { get; set; } = null!;
-        public ICollection<User> Users { get; set; } = null!;
+        public ICollection<Company> Companies { get; set; } = null!;
     }
 }

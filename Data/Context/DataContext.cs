@@ -6,15 +6,16 @@ namespace Portal.Data.Context
     public class DataContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-       // public DbSet<UserCountry> Countries { get; set; }
-        //public DbSet<UserRegion> Regions { get; set; }  
+        public DbSet<ContactPerson> ContactPerson { get; set; }
+        public DbSet<CompanyCountry> Countries { get; set; }
+        public DbSet<CompanyRegion> Regions { get; set; }  
 
         public DataContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasIndex(u => u.UserEmail)
+            modelBuilder.Entity<ContactPerson>()
+                .HasIndex(u => u.MainEmail)
                 .IsUnique();
 
   /*          modelBuilder.Entity<User>()
