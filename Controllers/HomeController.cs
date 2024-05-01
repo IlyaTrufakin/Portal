@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Portal.Models;
 using Portal.Models.Home;
-using Portal.Models.Home.SignUp;
 using System.Diagnostics;
 using Portal.Data.Dal;
 using Portal.Services.Hash;
 using Portal.Services.Kdf;
+using Portal.Models.Account.SignUp;
+using System.Net;
 
 namespace Portal.Controllers
 {
@@ -16,9 +17,9 @@ namespace Portal.Controllers
         private readonly IKdfService _kdfService;
         private readonly DataAccessor _dataAccessor;
 
-        public HomeController(ILogger<HomeController> logger, 
-                                IHashService hashService, 
-                                IKdfService kdfService, 
+        public HomeController(ILogger<HomeController> logger,
+                                IHashService hashService,
+                                IKdfService kdfService,
                                 DataAccessor dataAccessor)
         {
             _logger = logger;
@@ -63,7 +64,7 @@ namespace Portal.Controllers
                 ValidationErrors = _ValidateSignUpModel(formModel)
             };
 
-            if (formModel?.UserEmail != null)
+            if (formModel?.UserAccountEmail != null)
             {
                 if (pageModel.ValidationErrors.Any())
                 {
@@ -75,7 +76,7 @@ namespace Portal.Controllers
                     _dataAccessor.UserDao.SignUpUser(mapUser(formModel));
                     pageModel.Message = "Реєстрація успішна";
                     pageModel.IsSuccess = true;
-            
+
                 }
 
                 formModel = null;
@@ -84,28 +85,32 @@ namespace Portal.Controllers
             return View(pageModel);
         }
 
-
-        private Data.Entities.User mapUser(SignUpFormModel formModel)
+        private (Data.Entities.User, Data.Entities.ContactPerson) mapUser(SignUpFormModel formModel)
         {
             string salt = Guid.NewGuid().ToString();
-            return new()
+            var profile = new Data.Entities.ContactPerson
             {
                 Id = Guid.NewGuid(),
-                UserName = formModel.UserName,
-                UserSurName = formModel.UserSurName,
-                UserPhoneNumber = formModel.UserPhoneNumber,
-                UserEmail = formModel.UserEmail,
-                UserCountry = formModel.UserCountry,
-                UserRegion = formModel.UserRegion,
-                UserLocality = formModel.UserLocality,
-                UserAddress1 = formModel.UserAddress1,
-                UserAddress2 = formModel.UserAddress2,
-                UserInteractionForm = formModel.UserInteractionForm,
-                UserCompanyName = formModel.UserCompanyName,
-                UserRegistered = DateTime.Now,
-                Salt = salt,
-                DerivedKey = _kdfService.GetDerivedKey(formModel.UserPassword, salt)
+                Name = formModel.UserName,
+                SurName = formModel.UserSurName,
+                Phone = formModel.UserPhoneNumber,
+                WorkEmail = formModel.UserWorkEmail,
+                Description = formModel.UserDescription,
+                IsChecked = formModel.IsChecked,
+                IsVisible = formModel.IsVisible,
+                AvatarUrl = formModel.SavedFilename
             };
+
+            var user = new Data.Entities.User
+            {
+                Id = Guid.NewGuid(),
+                ContactPersonId = profile.Id,
+                AccountEmail = formModel.UserAccountEmail,
+                Salt = salt,
+                DerivedKey = _kdfService.GetDerivedKey(formModel.UserPassword, salt),
+                UserRegistered = DateTime.Now
+            };
+            return (user, profile);
         }
 
 
@@ -130,13 +135,13 @@ namespace Portal.Controllers
                 {
                     res[nameof(formModel.UserPhoneNumber)] = "Номер телефону користувача не вказано!";
                 }
-                if (String.IsNullOrEmpty(formModel.UserEmail))
+                if (String.IsNullOrEmpty(formModel.UserAccountEmail))
                 {
-                    res[nameof(formModel.UserEmail)] = "Електронна адреса не задана!";
+                    res[nameof(formModel.UserAccountEmail)] = "Електронна адреса не задана!";
                 }
-                if (! _dataAccessor.UserDao.IsEmailFree(formModel.UserEmail))
+                if (!_dataAccessor.UserDao.IsEmailFree(formModel.UserAccountEmail))
                 {
-                    res[nameof(formModel.UserEmail)] = "Вказана електронна адреса вже зареєстрована!";
+                    res[nameof(formModel.UserAccountEmail)] = "Вказана електронна адреса вже зареєстрована!";
                 }
                 if (String.IsNullOrEmpty(formModel.UserPassword))
                 {

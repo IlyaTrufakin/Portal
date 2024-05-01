@@ -6,7 +6,7 @@ namespace Portal.Data.Context
     public class DataContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<ContactPerson> ContactPerson { get; set; }
+        public DbSet<ContactPerson> ContactPersons { get; set; }
         public DbSet<CompanyCountry> Countries { get; set; }
         public DbSet<CompanyRegion> Regions { get; set; }  
 
@@ -14,8 +14,8 @@ namespace Portal.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ContactPerson>()
-                .HasIndex(u => u.MainEmail)
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.AccountEmail)
                 .IsUnique();
 
   /*          modelBuilder.Entity<User>()

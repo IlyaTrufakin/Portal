@@ -12,13 +12,16 @@ namespace Portal.Data.Dal
         }
         public bool IsEmailFree(String email)
         {
-            return ! _context.Users.Where(u => u.UserEmail == email).Any();
+            return ! _context.Users.Where(u => u.AccountEmail == email).Any();
         }
 
-        public void SignUpUser(User user)
+        public void SignUpUser((User , ContactPerson) value)
         {
-            _context.Users.Add(user);
+            _context.Users.Add(value.Item1);
+            _context.ContactPersons.Add(value.Item2);
             _context.SaveChanges();
         }
+
+    
     }
 }

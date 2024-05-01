@@ -1,4 +1,4 @@
-﻿@model Portal.Models.Home.SignUp.SignUpPageModel
+﻿@model Portal.Models.Account.SignUp.SignUpPageModel
 
 @{
     ViewData["Title"] = "SignUp";
@@ -16,173 +16,151 @@
         <div class="col">
             <div class="row">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="userName-addon"><i class="bi bi-person-fill-add"></i></span>
-                    <input type="text" class="form-control" placeholder="Введіть Ім`я:" aria-label="UserName"
-                           aria-describedby="userName-addon" name="signup-userName"
+                    <span class="input-group-text" id="contactPersonName-addon"><i class="bi bi-person-fill-add"></i></span>
+                    <input type="text" class="form-control"
+                           placeholder="Введіть Ім`я:"
+                           aria-label="UserName"
+                           aria-describedby="contactPersonName-addon"
+                           name="signup-contactPersonName"
                            value="@Model.SignUpFormModel?.UserName">
                 </div>
                 @if (Model.ValidationErrors.ContainsKey("UserName"))
                 {
                     <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserName"]</div>
                 }
+
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="userSurname-addon"><i class="bi bi-person-fill-add"></i></span>
-                    <input type="text" class="form-control" placeholder="Введіть Прізвище:" aria-label="UserSurname"
-                           aria-describedby="userSurname-addon" name="signup-userSurname"
+                    <span class="input-group-text" id="contactPersonSurname-addon"><i class="bi bi-person-fill-add"></i></span>
+                    <input type="text" class="form-control"
+                           placeholder="Введіть Прізвище:"
+                           aria-label="UserSurname"
+                           aria-describedby="contactPersonSurname-addon"
+                           name="signup-contactPersonSurname"
                            value="@Model.SignUpFormModel?.UserSurName">
                 </div>
                 @if (Model.ValidationErrors.ContainsKey("UserSurName"))
                 {
                     <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserSurName"]</div>
                 }
+
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="userPhone-addon"><i class="bi bi-phone"></i></span>
-                    <input type="tel" class="form-control" placeholder="Введіть Телефон:" aria-label="UserPhone"
-                           aria-describedby="userPhone-addon" name="signup-userPhone"
+                    <span class="input-group-text" id="contactPersonPhone-addon"><i class="bi bi-phone"></i></span>
+                    <input type="tel" class="form-control"
+                           placeholder="Введіть Телефон:"
+                           aria-label="UserPhone"
+                           aria-describedby="contactPersonPhone-addon"
+                           name="signup-contactPersonPhone"
                            value="@Model.SignUpFormModel?.UserPhoneNumber">
                 </div>
                 @if (Model.ValidationErrors.ContainsKey("UserPhoneNumber"))
                 {
                     <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserPhoneNumber"]</div>
                 }
+
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="userEmail-addon"><i class="bi bi-envelope-at"></i></span>
-                    <input type="tel" class="form-control" placeholder="Введіть Email:" aria-label="UserEmail"
-                           aria-describedby="userEmail-addon" name="signup-userEmail"
-                           value="@Model.SignUpFormModel?.UserEmail">
+                    <span class="input-group-text" id="userAccountEmail-addon"><i class="bi bi-envelope-at"></i></span>
+                    <input type="email" class="form-control"
+                           placeholder="Введіть Email (тільки для работи з обліковим записом):"
+                           aria-label="UserEmail"
+                           aria-describedby="userAccountEmail-addon"
+                           name="signup-userAccountEmail"
+                           value="@Model.SignUpFormModel?.UserAccountEmail">
                 </div>
                 @if (Model.ValidationErrors.ContainsKey("UserEmail"))
                 {
                     <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserEmail"]</div>
                 }
-                <p>Введіть Адресу:</p>
+              
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="userCountry-addon"><i class="bi bi-geo-alt"></i></span>
-                    <input type="text" class="form-control" placeholder="Страна:" aria-label="UserCountry"
-                           aria-describedby="userCountry-addon" name="signup-userCountry"
-                           value="@Model.SignUpFormModel?.UserCountry">
+                    <span class="input-group-text" id="contactPersonWorkEmail-addon"><i class="bi bi-envelope-at"></i></span>
+                    <input type="email" class="form-control"
+                           placeholder="Введіть робочий Email:"
+                           aria-label="WorkEmail"
+                           aria-describedby="contactPersonWorkEmail-addon"
+                           name="signup-contactPersonWorkEmail"
+                           value="@Model.SignUpFormModel?.UserWorkEmail">
                 </div>
-                @if (Model.ValidationErrors.ContainsKey("UserCountry"))
+                @if (Model.ValidationErrors.ContainsKey("WorkEmail"))
                 {
-                    <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserCountry"]</div>
+                    <div class="p-1 alert alert-danger">@Model.ValidationErrors["WorkEmail"]</div>
                 }
 
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="userRegion-addon"><i class="bi bi-geo-alt"></i></span>
-                    <input type="text" class="form-control" placeholder="Область:" aria-label="UserRegion"
-                           aria-describedby="userRegion-addon" name="signup-userRegion"
-                           value="@Model.SignUpFormModel?.UserRegion">
+                    <span class="input-group-text" id="contactPersonDescription-addon"><i class="bi bi-geo-alt"></i></span>
+                    <input type="text" class="form-control"
+                           placeholder="Вкажить посаду:"
+                           aria-label="СontactPersonDescription"
+                           aria-describedby="contactPersonDescription-addon"
+                           name="signup-contactPersonDescription"
+                           value="@Model.SignUpFormModel?.UserDescription">
                 </div>
-                @if (Model.ValidationErrors.ContainsKey("UserRegion"))
+                @if (Model.ValidationErrors.ContainsKey("UserDescription"))
                 {
-                    <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserRegion"]</div>
+                    <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserDescription"]</div>
                 }
 
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="userLocality-addon"><i class="bi bi-geo-alt"></i></span>
-                    <input type="text" class="form-control" placeholder="Населений пункт:" aria-label="UserLocality"
-                           aria-describedby="userLocality-addon" name="signup-userLocality"
-                           value="@Model.SignUpFormModel?.UserLocality">
+                    <label class="input-group-text" for="signup-avatar"><i class="bi bi-person"></i></label>
+                    <input type="file" class="form-control"
+                           id="signup-avatar"
+                           name="signup-avatar">
                 </div>
-                @if (Model.ValidationErrors.ContainsKey("UserLocality"))
-                {
-                    <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserLocality"]</div>
-                }
 
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="userAddress1-addon"><i class="bi bi-geo-alt"></i></span>
-                    <input type="text" class="form-control" placeholder="Адреса:" aria-label="UserAddress1"
-                           aria-describedby="userAddress1-addon" name="signup-userAddress1"
-                           value="@Model.SignUpFormModel?.UserAddress1">
-                </div>
-                @if (Model.ValidationErrors.ContainsKey("UserAddress1"))
-                {
-                    <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserAddress1"]</div>
-                }
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="userAddress2-addon"><i class="bi bi-geo-alt"></i></span>
-                    <input type="text" class="form-control" placeholder="Будова/дім/кв.:" aria-label="UserAddress2"
-                           aria-describedby="userAddress2-addon" name="signup-userAddress2"
-                           value="@Model.SignUpFormModel?.UserAddress2">
-                </div>
-                @if (Model.ValidationErrors.ContainsKey("UserAddress2"))
-                {
-                    <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserAddress2"]</div>
-                }
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="userInteractionForm-addon"><i class="bi bi-person-workspace"></i></span>
-                    <select class="form-select" aria-label="UserInteractionForm" aria-describedby="userInteractionForm-addon"
-                            name="signup-userInteractionForm">
-                        @*                       <option selected>Оберить форму взаємодії (фізична/юридична особа)</option>
-                        <option value="Фізична-особа">Фізична особа</option>
-                        <option value="Юрідична-особа">Юрідична особа</option> *@
-
-
-
-                        @if (Model.SignUpFormModel?.UserInteractionForm == "Фізична-особа")
-                        {
-                            <option selected>Фізична особа</option>
-                            <option value="Юрідична-особа">Юрідична особа</option>
-                        }
-                        else if (Model.SignUpFormModel?.UserInteractionForm == "Юрідична-особа")
-                        {
-                            <option selected>Юрідична особа</option>
-                            <option value="Фізична-особа">Фізична особа</option>
-                        }
-                        else
-                        {
-                            <option selected>Оберить форму взаємодії (фізична/юридична особа)</option>
-                            <option value="Фізична-особа">Фізична особа</option>
-                            <option value="Юрідична-особа">Юрідична особа</option>
-                        }
-                    </select>
-                </div>
-                @if (Model.ValidationErrors.ContainsKey("UserInteractionForm"))
-                {
-                    <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserInteractionForm"]</div>
-                }
-
-
-                @* <option value="Фізична-особа">Фізична особа</option>
-                value="@Model.SignUpFormModel?.UserInteractionForm"
-                <option value="Юрідична-особа">Юрідична особа</option> *@
-
-
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="userCompanyName-addon"><i class="bi bi-building"></i></span>
-                    <input type="text" class="form-control" placeholder="Введіть назву организації:" aria-label="UserCompanyName"
-                           aria-describedby="userCompanyName-addon" name="signup-userCompanyName"
-                           value="@Model.SignUpFormModel?.UserCompanyName">
-                </div>
-                @if (Model.ValidationErrors.ContainsKey("UserCompanyName"))
-                {
-                    <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserCompanyName"]</div>
-                }
             </div>
         </div>
 
         <div class="col">
+
             <div class="row">
+
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="userPassword-addon"><i class="bi bi-person-fill-add"></i></span>
-                    <input type="password" class="form-control" placeholder="Введіть пароль:" aria-label="UserPassword" aria-describedby="userPassword-addon" name="signup-userPassword">
+                    <input type="password" class="form-control" 
+                    placeholder="Введіть пароль:" 
+                    aria-label="UserPassword" 
+                    aria-describedby="userPassword-addon" 
+                    name="signup-userPassword">
                 </div>
+
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="userPasswordConfirm-addon"><i class="bi bi-person-fill-add"></i></span>
-                    <input type="password" class="form-control" placeholder="Підтвердіть пароль:" aria-label="UserPasswordConfirm" aria-describedby="userPasswordConfirm-addon" name="signup-userPasswordConfirm">
+                    <input type="password" class="form-control" 
+                    placeholder="Підтвердіть пароль:" 
+                    aria-label="UserPasswordConfirm" 
+                    aria-describedby="userPasswordConfirm-addon" 
+                    name="signup-userPasswordConfirm">
                 </div>
+
                 @if (Model.ValidationErrors.ContainsKey("UserPasswordConfirm"))
                 {
                     <div class="p-1 alert alert-danger">@Model.ValidationErrors["UserPasswordConfirm"]</div>
                 }
 
+
+                <div class="col">
+                    <div class="form-check">
+                        <input name="signup-privacyConfirm" type="checkbox" value="true" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Погоджуюсь із правилами сайту
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-check">
+                        <input name="signup-isVisible" type="checkbox" value="true" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Відображати мої контактні дані.
+                        </label>
+                    </div>
+                </div>
+
+
+
                 <div class="input-group mb-3">
                     <button type="submit" class="btn btn-outline-primary">Реєстрація</button>
                 </div>
+
                 <div class="mb-3">
                     @if (Model.IsSuccess != null)
                     {

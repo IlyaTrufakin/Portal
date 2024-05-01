@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace Portal.Models.Home.SignUp
+namespace Portal.Models.Company
 {
-    public class SignUpFormModel
+    public class CompanyFormModel
     {
 
         [Required]
