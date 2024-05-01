@@ -7,6 +7,7 @@ using Portal.Services.Hash;
 using Portal.Services.Kdf;
 using Portal.Models.Account.SignUp;
 using System.Net;
+using Portal.Services.Upload;
 
 namespace Portal.Controllers
 {
@@ -16,16 +17,19 @@ namespace Portal.Controllers
         private readonly IHashService _hashService;
         private readonly IKdfService _kdfService;
         private readonly DataAccessor _dataAccessor;
+        private readonly IUploadService _uploadService;
 
         public HomeController(ILogger<HomeController> logger,
                                 IHashService hashService,
                                 IKdfService kdfService,
-                                DataAccessor dataAccessor)
+                                DataAccessor dataAccessor,
+                                IUploadService uploadService)
         {
             _logger = logger;
             _hashService = hashService;
             _kdfService = kdfService;
             _dataAccessor = dataAccessor;
+            _uploadService = uploadService;
         }
 
         public IActionResult Index()
@@ -150,6 +154,26 @@ namespace Portal.Controllers
                 if (formModel.UserPassword != formModel.UserPasswordConfirm)
                 {
                     res[nameof(formModel.UserPasswordConfirm)] = "Підтвердження паролю невірне!";
+                }
+                // погодження з умовами
+                if (!formModel.PrivacyConfirm)
+                {
+                    res[nameof(formModel.PrivacyConfirm)] = "Confirm expected";
+                }
+                //якщо немає помилок - то обробляємо файл аватарку
+                if (res.Count == 0)
+                {
+                    if (formModel.AvatarFile != null)
+                    {
+                        try
+                        {
+                            formModel.SavedFilename = _uploadService.SaveFromFile(formModel.AvatarFile, "wwwroot/img/avatars/");
+                        }
+                        catch (Exception ex)
+                        {
+                            res[nameof(formModel.AvatarFile)] = ex.Message;
+                        }
+                    }
                 }
             }
             return res;

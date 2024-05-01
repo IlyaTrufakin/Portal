@@ -9,6 +9,9 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Models\Account\SignIn\" />
+    <Folder Include="wwwroot\img\avatars\" />
+    <Folder Include="wwwroot\img\services\" />
+    <Folder Include="wwwroot\img\products\" />
   </ItemGroup>
 
   <ItemGroup>
